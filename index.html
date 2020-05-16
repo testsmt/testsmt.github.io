@@ -30,24 +30,45 @@
 <font face="ariel,helvetica">
 
 <h2>Project Yin-Yang for SMT Solver Testing</h2>
-Satisfiability Modulo Theory (SMT) solvers are fundamental tools for many computer 
-science areas, such as verification, programming languages and software engineering. 
-However, effectively testing SMT solvers was a long-standing and challenging problem.  
-We propose two techniques for effectively testing SMT solvers: Semantic Fusion [1] 
-and Type-aware Mutation [2]. The key idea of Semantic Fusion is to fuse two existing 
-equisatisfiable (i.e., both satisfiable or unsatisfiable) formulas into a new formula 
-that preserves the satisfiability by construction. Type-aware Mutation stress-tests 
-SMT solvers by generating diverse type-correct formulas for differential testing. 
 
-YinYang and OpFuzz, the realizations of Semantic Fusion and Type-aware Mutation, 
-have shown their effectiveness by finding hundreds of bugs in the two state-of-the-art SMT 
-solvers Z3 and CVC4. 
+<h3>Team</h3>
+<ul>
+<li><a href="https://people.inf.ethz.ch/suz">Zhendong Su</a></li>
+<li><a href="https://wintered.github.io/">Dominik Winterer</a></li>
+<li><a href="http://chengyuzhang.com">Chengyu Zhang</a></li>
+</ul>
 
-The long-term goal of this project is to explore novel, 
-effective and practical techniques to help SMT solvers become more reliable and 
-stable. 
-<p> 
-We have maintained our continuous, extensive effort in stress-testing Z3 and CVC4 to benefit the entire community:
+<h3>Project Goal</h3> 
+
+Satisfiability Modulo Theory (SMT) solvers are foundational tools for
+many subareas of computer science, including formal verification,
+programming languages, and software engineering. Their reliability and
+robustness are crucial, especially for the safety-critical
+domains. However, effectively validating SMT solvers has been a
+longstanding challenge.  The goal of Project Yin-Yang is to develop
+novel, effective, practical methods and techniques to help make SMT
+solvers more reliable, powerful, and usable.
+
+To this end, we have introduced two novel, highly effective techniques
+for stress-testing SMT solvers: <i>semantic fusion</i> [1]
+and <i>type-aware operator mutation</i> [2]. The key idea behind
+semantic fusion is to systematically combine two existing
+equisatisfiable (i.e., both satisfiable or unsatisfiable) formulas
+into a new formula that, by construction, preserves
+satisfiability. Type-aware operator mutation is a simple, general,
+unusually effective approach for differentially testing SMT solvers by
+generating diverse type-correct formulas.
+
+YinYang and OpFuzz, the realizations of semantic fusion and type-aware
+operator mutation, have demonstrated their effectiveness by finding
+1,000+ bugs Z3 and CVC4, the two state-of-the-art SMT solvers. 
+
+<p>
+
+We have maintained our continuous, extensive effort in stress-testing
+Z3 and CVC4 to benefit the SMT solver developer, user, and research
+communities:
+
 <p>
 
 <p>[Summary: <b>907</b> (total) / <b>524</b> (fixed)]<br>
@@ -58,18 +79,25 @@ We have maintained our continuous, extensive effort in stress-testing Z3 and CVC
 <p>[Soundness bugs (Z3): <b>202</b> (total) / <b>111</b> (fixed)]<br>
 [Soundness bugs (CVC4): <b>23 </b> (total) / <b>15 </b> (fixed)]<br>
 
-<p>Report links: Semantic Fusion (<a href="yinyang_bugs.html">link</a>), Type-aware Mutation (<a href="opfuzz_bugs.html">link</a>)</p><br>
+<p>Report links:
+  Semantic Fusion (<a href="yinyang_bugs.html">link</a>),
+  Type-aware Operator Mutation (<a href="opfuzz_bugs.html">link</a>)
+</p>
 
-You may also want to follow our twitter account <a href="https://twitter.com/testsmtsolvers">@testsmt</a> where we regularly tweet  
-on interesting bugs in Z3 and CVC4. 
+Please follow us on
+twitter <a href="https://twitter.com/testsmtsolvers">@testsmt</a> for
+important project developments and regular tweets about interesting
+bugs in Z3 and CVC4.
 
-<h3>Papers</h3>
+<h3>Publications</h3>
 
-[1] <a href="https://wintered.github.io/papers/winterer-zhang-su-pldi20.pdf"><B>Validating SMT Solvers via Semantic Fusion</B></a>. 
-<br> 
+[1] <a href="https://wintered.github.io/papers/winterer-zhang-su-pldi20.pdf">
+  <B>Validating SMT Solvers via Semantic Fusion</B></a>.<br> 
 Dominik Winterer<sup>*</sup>, Chengyu Zhang<sup>*</sup> and Zhendong Su</br> 
 In <a href=""><I>Proceedings of PLDI'20</I></a>, London, UK, June 2020. </br>
-<div style="font-size:10pt; margin-top:5pt;margin-bottom:-10pt "><sup>*</sup> Both authors contributed equally to this work. </div>
+<div style="font-size:10pt; margin-top:5pt;margin-bottom:-10pt "><sup>*</sup>
+  Both authors contributed equally to this work.
+</div>
 <p>
 <div>
     <img src="img/award.png" width="36" style="vertical-align:middle">
@@ -81,18 +109,13 @@ In <a href=""><I>Proceedings of PLDI'20</I></a>, London, UK, June 2020. </br>
 Dominik Winterer<sup>*</sup>, Chengyu Zhang<sup>*</sup> and Zhendong Su</br> 
 <I> CoRR, abs/2004.08799, 2020. </I> <br>
 <div style="font-size:10pt; margin-top:5pt"><sup>*</sup> Both authors contributed equally to this work. </div>
-<br>
-<br>
-
-<h3>Team </h3> 
-<a href="https://people.inf.ethz.ch/suz">Zhendong Su</a><br>
-<a href="https://wintered.github.io/">Dominik Winterer</a><br>
-<a href="http://chengyuzhang.com">Chengyu Zhang</a><br>
-</font>
-<br>
-<br>
 
 </font>
-<tt>last modified: 2020.04.21</tt>
+
+</font>
+
+<br>
+
+<tt>last modified: 2020.05.15</tt>
 </body>
 </html>
