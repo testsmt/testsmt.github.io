@@ -80,7 +80,7 @@ def extract_url(issue):
         if "link:" in l or "Link" in l:
             l = l.strip()
             return l.split(" ")[-1]
-    print(body)
+    print(issue)
     assert(False)
 
 def get_status(issue):
@@ -89,7 +89,7 @@ def get_status(issue):
     if has_labels(issue,"Fixed"): return "Fixed"
     if has_labels(issue,"Duplicate"): return "Dup"
     if has_labels(issue,"Won't fix") or has_labels(issue,"no-repro"): return "Won't fix"
-    print(issue.labels, issue.html_url)
+    print(issue.labels, issue.html_url,flush=True)
     assert(False)
 
 
