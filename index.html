@@ -31,15 +31,6 @@
 
 <h2>Project Yin-Yang for SMT Solver Testing</h2>
 
-<h3>Team</h3>
-<ul>
-<li><a href="https://people.inf.ethz.ch/suz">Zhendong Su</a></li>
-<li><a href="https://wintered.github.io/">Dominik Winterer</a></li>
-<li><a href="http://chengyuzhang.com">Chengyu Zhang</a></li>
-</ul>
-
-<h3>Project Goal</h3> 
-
 Satisfiability Modulo Theory (SMT) solvers are foundational tools for
 many subareas of computer science, including formal verification,
 programming languages, and software engineering. Their reliability and
@@ -72,75 +63,58 @@ communities:
 
 <p>
 
-<p>[Summary: <b>1103</b> (total) / <b>703</b> (fixed)]<br>
-<p>[Z3 bugs: <b>829</b> (total) / <b>553</b> (fixed)]<br>
-[CVC4 bugs: <b>274</b> (total) / <b>150</b> (fixed)]<br>
-<p>[Bugs in default mode (Z3): <b>540</b> (total) / <b>386</b> (fixed)]<br>
-[Bugs in default mode (CVC4): <b>128</b> (total) / <b>74</b> (fixed)]<br>
-<p>[Soundness bugs (Z3): <b>259</b> (total) / <b>150</b> (fixed)]<br>
-[Soundness bugs (CVC4): <b>37</b> (total) / <b>25</b> (fixed)]<br>
+<p>[Summary: <b>1166</b> (total) / <b>738</b> (fixed)]<br>
+<p>[Z3 bugs: <b>866</b> (total) / <b>563</b> (fixed)]<br>
+[CVC4 bugs: <b>300</b> (total) / <b>175</b> (fixed)]<br>
+<p>[Bugs in default mode (Z3): <b>562</b> (total) / <b>390</b> (fixed)]<br>
+[Bugs in default mode (CVC4): <b>139</b> (total) / <b>91</b> (fixed)]<br>
+<p>[Soundness bugs (Z3): <b>271</b> (total) / <b>151</b> (fixed)]<br>
+[Soundness bugs (CVC4): <b>40</b> (total) / <b>30</b> (fixed)]<br>
 
 <p>Report links:
   Semantic Fusion (<a href="yinyang_bugs.html">link</a>),
   Type-aware Operator Mutation (<a href="opfuzz_bugs.html">link</a>)
 </p>
 
+<p><b>Yin-Yang Tool Release</b>: <a href="https://github.com/testsmt/yinyang">https://github.com/testsmt/yinyang</a></p>
+
 Please follow us on
-twitter <a href="https://twitter.com/testsmtsolvers">@testsmt</a> for
+Twitter <a href="https://twitter.com/testsmtsolvers">@testsmt</a> for
 important project developments and regular tweets about interesting
 bugs in Z3 and CVC4.
 
+<h3>Team</h3>
+<a href="https://people.inf.ethz.ch/suz">Zhendong Su</a> <br>
+<a href="https://wintered.github.io/">Dominik Winterer</a> <br>
+<a href="http://chengyuzhang.com">Chengyu Zhang</a> <br>
+
 <h3>Publications</h3>
 
-<ol>
-
-<li>
   <!--<a href="https://testsmt.github.io/papers/winterer-zhang-su-pldi20.pdf">-->
-  <a href="https://dl.acm.org/doi/pdf/10.1145/3385412.3385985">
-  <B>Validating SMT Solvers via Semantic Fusion</B></a>.<br> 
-Dominik Winterer<sup>*</sup>, Chengyu Zhang<sup>*</sup> and Zhendong Su</br> 
+  [1] <a href="https://dl.acm.org/doi/pdf/10.1145/3385412.3385985">
+  <B>Validating SMT Solvers via Semantic Fusion</B></a>. [<a href="https://testsmt.github.io/slides/pldi20-semantic-fusion.pdf">slides</a> |
+  <a href="https://www.youtube.com/watch?list=PLyrlk8Xaylp5mvxARtX5ncjy9p4X_Ajwd&time_continue=1&v=JFu8cJYbxBI&feature=emb_logo">video abstract</a> |
+  <a href="https://www.youtube.com/watch?v=hEWpbO5yXPw&list=PLyrlk8Xaylp5mvxARtX5ncjy9p4X_Ajwd&index=178">talk video</a>] <br> 
+Dominik Winterer<sup>*</sup>, Chengyu Zhang<sup>*</sup> and Zhendong Su </br> 
 In <a href="https://conf.researchr.org/home/pldi-2020"><I>Proceedings of PLDI 2020</I></a>, London, UK, June 2020. </br>
-<div style="font-size:10pt; margin-top:5pt;margin-bottom:-10pt "><sup>*</sup>
+<div style="font-size:10pt;margin-bottom:-10pt "><sup>*</sup>
   Both authors contributed equally to this work.
 </div>
-<p>
-<div>
-    <img src="img/award.png" width="36" style="vertical-align:middle">
-    <font color="red"><b>Distinguished Paper Award</b></font>
-</div>
-</p>
+  <br><font color="red">PLDI Distinguished Paper Award</font> <br><br>
 
-<p>
-  [<a href="https://testsmt.github.io/slides/pldi20-semantic-fusion.pdf"><b>slides</b></a> |
-  <a href="https://www.youtube.com/watch?list=PLyrlk8Xaylp5mvxARtX5ncjy9p4X_Ajwd&time_continue=1&v=JFu8cJYbxBI&feature=emb_logo"><b>video abstract</b></a> |
-  <a href="https://www.youtube.com/watch?v=hEWpbO5yXPw&list=PLyrlk8Xaylp5mvxARtX5ncjy9p4X_Ajwd&index=178"><b>talk video</b></a>]
-
-<!--<a href="https://www.youtube.com/watch?v=zkU8WyqWO-Q&feature=youtu.be&t=7686"><b>talk video</b></a>]-->
-</p>
-
-</li>
-
-<li>
-<a href=""><B>On the Unusual Effectiveness of Type-aware Mutations for Testing SMT Solvers</B></a>. 
+  [2] <a href="https://arxiv.org/pdf/2004.08799.pdf"><B>On the Unusual Effectiveness of Type-aware Operator Mutations for Testing SMT Solvers</B></a>. 
 <br> 
 Dominik Winterer<sup>*</sup>, Chengyu Zhang<sup>*</sup> and Zhendong Su</br>
 In <a href="https://2020.splashcon.org/"><I>Proceedings of SPLASH/OOPSLA 2020</I></a>, November 2020.
 </br>
-<div style="font-size:10pt; margin-top:5pt"><sup>*</sup> Both authors contributed equally to this work. </div>
-
-<p>
-arXiv preprint: <a href="https://arxiv.org/abs/2004.08799"><I>CoRR, abs/2004.08799</I></a>, April 2020.
-</p>
-</li>
-
-</ol>
+<div style="font-size:10pt;margin-bottom:-10pt"><sup>*</sup> Both authors contributed equally to this work. </div>
 
 </font>
 
 </font>
 
-<br>
+<br><br><br><br>
 
-<tt>last modified: 2020.08.05</tt>
+<tt>last modified: 2020.10.31</tt>
 </body>
 </html>
