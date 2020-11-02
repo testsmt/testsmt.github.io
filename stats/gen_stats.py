@@ -79,7 +79,9 @@ def extract_url(issue):
     for l in body.split("\n"):
         if "link:" in l or "Link:" in l:
             l = l.strip()
-            return l.split(":")[-1]
+            l = l.split(":")[-2]+":"+l.split(":")[-1]
+            l=l.strip()
+            return l
     assert(False)
 
 def get_status(issue):
