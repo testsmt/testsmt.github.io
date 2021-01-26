@@ -66,13 +66,13 @@ def print_counts(sf_stats,ta_stats):
     z3_soundness, z3_fixed_soundness = len(sf_stats[8]) + len(ta_stats[8]),len(sf_stats[10]) + len(ta_stats[10])
     cvc4_soundness, cvc4_fixed_soundness = len(sf_stats[9]) + len(ta_stats[9]),len(sf_stats[11]) + len(ta_stats[11])
 
-    print("[Summary: {0} (total) / {1} (fixed)]".format(summary_total, summary_fixed))
-    print("[Z3 bugs: {0} (total) / {1} (fixed)]".format(z3_total, z3_fixed))
-    print("[CVC4 bugs: {0} (total) / {1} (fixed)]".format(cvc4_total, cvc4_fixed))
-    print("[Bugs in default mode (Z3): {0} (total) / {1} (fixed)]".format(z3_default, z3_fixed_default))
-    print("[Bugs in default mode (CVC4): {0} (total) / {1} (fixed)]".format(cvc4_default, cvc4_fixed_default))
-    print("[Soundness bugs (Z3): {0} (total) / {1} (fixed)]".format(z3_soundness, z3_fixed_soundness))
-    print("[Soundness bugs (CVC4): {0} (total) / {1} (fixed)]".format(cvc4_soundness, cvc4_fixed_soundness))
+    print("<p>[Summary: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(summary_total, summary_fixed))
+    print("<p>[Z3 bugs: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_total, z3_fixed))
+    print("[CVC4 bugs: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_total, cvc4_fixed))
+    print("<p>[Bugs in default mode (Z3): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_default, z3_fixed_default))
+    print("[Bugs in default mode (CVC4): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_default, cvc4_fixed_default))
+    print("<p>[Soundness bugs (Z3): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_soundness, z3_fixed_soundness))
+    print("[Soundness bugs (CVC4): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_soundness, cvc4_fixed_soundness))
 
 def extract_url(issue):
     body = issue.body
@@ -80,8 +80,9 @@ def extract_url(issue):
         if "link:" in l or "Link:" in l:
             l = l.strip()
             l = l.split(":")[-2]+":"+l.split(":")[-1]
-            l=l.strip()
+            l = l.strip()
             return l
+    print(issue)
     assert(False)
 
 def get_status(issue):
