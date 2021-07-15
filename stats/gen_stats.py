@@ -5,7 +5,7 @@ Note that privacy_key, ta_bug_repo, sf_bug_repo have to be provided by the user
 in a file encrpyt.py located in the same folder.
 """
 from github import Github
-from encrypt import privacy_key, ta_bug_repo, sf_bug_repo
+from encrypt import privacy_key, ta_bug_repo, sf_bug_repo, gta_bug_repo
 import argparse
 
 def has_labels(issue,labels):
@@ -40,6 +40,11 @@ def get_stats(repo_url):
         if has_labels(i, ["Z3","solution_soundness"]): z3_solution.append(i)
         if has_labels(i, ["CVC4","refutation_soundness"]): cvc4_refutation.append(i)
         if has_labels(i, ["CVC4","solution_soundness"]): cvc4_solution.append(i)
+        if has_labels(i, ["Z3","Soundness","oracle:sat"]): z3_refutation.append(i)
+        if has_labels(i, ["Z3","Soundness","oracle:unsat"]): z3_solution.append(i)
+        if has_labels(i, ["CVC4","Soundness", "oracle:sat"]): cvc4_refutation.append(i)
+        if has_labels(i, ["CVC4","Soundness","oracle:unsat"]): cvc4_solution.append(i)
+
     res = [z3, cvc4, z3_fixed, cvc4_fixed, z3_default, cvc4_default, z3_fixed_default,\
           cvc4_fixed_default, z3_soundness, cvc4_soundness, z3_fixed_soundness, cvc4_fixed_soundness,\
           z3_refutation, z3_solution,cvc4_refutation,cvc4_solution]
@@ -55,16 +60,14 @@ def get_stats(repo_url):
 [Soundness bugs (Z3): XXXX (total) / XXXX (fixed)]
 [Soundness bugs (CVC4): XXXX (total) / XXXX (fixed)]
 """
-def print_counts(sf_stats,ta_stats):
-    summary_total, summary_fixed = len(sf_stats[0]) + len(sf_stats[1]) + len(ta_stats[0]) + len(ta_stats[1]),\
-                                   len(sf_stats[2]) + len(sf_stats[3]) + len(ta_stats[2]) + len(ta_stats[3])
-    z3_total, z3_fixed = len(sf_stats[0]) + len(ta_stats[0]), len(sf_stats[2]) + len(ta_stats[2])
-    z3_total, z3_fixed = len(sf_stats[0]) + len(ta_stats[0]), len(sf_stats[2]) + len(ta_stats[2])
-    cvc4_total, cvc4_fixed = len(sf_stats[1]) + len(ta_stats[1]), len(sf_stats[3]) + len(ta_stats[3])
-    z3_default, z3_fixed_default = len(sf_stats[4]) + len(ta_stats[4]), len(sf_stats[6]) + len(ta_stats[6])
-    cvc4_default, cvc4_fixed_default = len(sf_stats[5]) + len(ta_stats[5]), len(sf_stats[7]) + len(ta_stats[7])
-    z3_soundness, z3_fixed_soundness = len(sf_stats[8]) + len(ta_stats[8]),len(sf_stats[10]) + len(ta_stats[10])
-    cvc4_soundness, cvc4_fixed_soundness = len(sf_stats[9]) + len(ta_stats[9]),len(sf_stats[11]) + len(ta_stats[11])
+def print_counts(sf_stats,ta_stats, gta_stats):
+    summary_total, summary_fixed = len(sf_stats[0]) + len(sf_stats[1]) + len(ta_stats[0]) + len(ta_stats[1]) + len(gta_stats[0]) + len(gta_stats[1]), len(sf_stats[2]) + len(sf_stats[3]) + len(ta_stats[2]) + len(ta_stats[3]) + len(gta_stats[2]) + len(gta_stats[3])
+    z3_total, z3_fixed = len(sf_stats[0]) + len(ta_stats[0]) + len(gta_stats[0]), len(sf_stats[2]) + len(ta_stats[2]) + len(gta_stats[2])
+    cvc4_total, cvc4_fixed = len(sf_stats[1]) + len(ta_stats[1]) + len(gta_stats[1]), len(sf_stats[3]) + len(ta_stats[3])  + len(gta_stats[3])
+    z3_default, z3_fixed_default = len(sf_stats[4]) + len(ta_stats[4]) + len(gta_stats[4]), len(sf_stats[6]) + len(ta_stats[6]) +len(gta_stats[6])
+    cvc4_default, cvc4_fixed_default = len(sf_stats[5]) + len(ta_stats[5]) + len(gta_stats[5]), len(sf_stats[7]) + len(ta_stats[7])+ len(gta_stats[7])
+    z3_soundness, z3_fixed_soundness = len(sf_stats[8]) + len(ta_stats[8]) + len(gta_stats[8]),len(sf_stats[10]) + len(ta_stats[10]) + len(gta_stats[10])
+    cvc4_soundness, cvc4_fixed_soundness = len(sf_stats[9]) + len(ta_stats[9]) + len(gta_stats[9]),len(sf_stats[11]) + len(ta_stats[11]) + len(gta_stats[11])
 
     print("<p>[Summary: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(summary_total, summary_fixed))
     print("<p>[Z3 bugs: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_total, z3_fixed))
@@ -172,15 +175,21 @@ if __name__ == "__main__":
     parser.add_argument('--summary', action='store_true')
     parser.add_argument('--sf-reports', action='store_true')
     parser.add_argument('--ta-reports', action='store_true')
+    parser.add_argument('--gta-reports', action='store_true')
+
     args = parser.parse_args()
     g = Github(privacy_key)
     if args.summary:
          ta_stats = get_stats(ta_bug_repo)
          sf_stats = get_stats(sf_bug_repo)
-         print_counts(sf_stats, ta_stats)
+         gta_stats = get_stats(gta_bug_repo)
+         print_counts(sf_stats, ta_stats, gta_stats)
     elif args.sf_reports:
         sf_stats = get_stats(sf_bug_repo)
         print_html_sf(sf_stats)
     elif args.ta_reports:
         ta_stats = get_stats(ta_bug_repo)
         print_html_ta(ta_stats)
+    elif args.gta_reports:
+        gta_stats = get_stats(gta_bug_repo)
+        print_html_ta(gta_stats)
