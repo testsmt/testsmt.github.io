@@ -79,13 +79,13 @@ def print_counts(sf_stats,ta_stats, gta_stats):
 
 def extract_url(issue):
     body = issue.body
+    # print("issue.number", issue.number)
     for l in body.split("\n"):
         if "link:" in l or "Link:" in l:
             l = l.strip()
             l = l.split(":")[-2]+":"+l.split(":")[-1]
             l = l.strip()
             return l
-    print(issue)
     assert(False)
 
 def get_status(issue):
