@@ -1,11 +1,11 @@
-#! /usr/bin/python3.7
+#! /usr/bin/python3.9
 """
 Script to generate bug statistics, i.e. counts and bug report link.
 Note that privacy_key, ta_bug_repo, sf_bug_repo have to be provided by the user
 in a file encrpyt.py located in the same folder.
 """
 from github import Github
-from encrypt import privacy_key, ta_bug_repo, sf_bug_repo, gta_bug_repo
+from encrypt import privacy_key, ta_bug_repo, sf_bug_repo, gta_bug_repo, janus_bug_repo
 import argparse
 
 def has_labels(issue,labels):
@@ -56,9 +56,9 @@ def get_stats(repo_url):
 [Z3 bugs: XXXX(total) / XXXX (fixed)]
 [CVC4 bugs: XXXX ((total) / XXXX(fixed)]
 [Bugs in default mode (Z3): XXXX (total) / XXXX(fixed)]
-[Bugs in default mode (CVC4): XXXX (total) / XXXX(fixed)]
+[Bugs in default mode (CVC4/5): XXXX (total) / XXXX(fixed)]
 [Soundness bugs (Z3): XXXX (total) / XXXX (fixed)]
-[Soundness bugs (CVC4): XXXX (total) / XXXX (fixed)]
+[Soundness bugs (CVC4/5): XXXX (total) / XXXX (fixed)]
 """
 def print_counts(sf_stats,ta_stats, gta_stats):
     summary_total, summary_fixed = len(sf_stats[0]) + len(sf_stats[1]) + len(ta_stats[0]) + len(ta_stats[1]) + len(gta_stats[0]) + len(gta_stats[1]), len(sf_stats[2]) + len(sf_stats[3]) + len(ta_stats[2]) + len(ta_stats[3]) + len(gta_stats[2]) + len(gta_stats[3])
@@ -73,9 +73,9 @@ def print_counts(sf_stats,ta_stats, gta_stats):
     print("<p>[Z3 bugs: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_total, z3_fixed))
     print("[CVC4 bugs: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_total, cvc4_fixed))
     print("<p>[Bugs in default mode (Z3): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_default, z3_fixed_default))
-    print("[Bugs in default mode (CVC4): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_default, cvc4_fixed_default))
+    print("[Bugs in default mode (CVC4/5): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_default, cvc4_fixed_default))
     print("<p>[Soundness bugs (Z3): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_soundness, z3_fixed_soundness))
-    print("[Soundness bugs (CVC4): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_soundness, cvc4_fixed_soundness))
+    print("[Soundness bugs (CVC4/5): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_soundness, cvc4_fixed_soundness))
 
 def extract_url(issue):
     body = issue.body
@@ -176,6 +176,7 @@ if __name__ == "__main__":
     parser.add_argument('--sf-reports', action='store_true')
     parser.add_argument('--ta-reports', action='store_true')
     parser.add_argument('--gta-reports', action='store_true')
+    parser.add_argument('--janus-reports', action='store_true')
 
     args = parser.parse_args()
     g = Github(privacy_key)
@@ -183,6 +184,8 @@ if __name__ == "__main__":
          ta_stats = get_stats(ta_bug_repo)
          sf_stats = get_stats(sf_bug_repo)
          gta_stats = get_stats(gta_bug_repo)
+         janus_stats = get_stats(janus_bug_repo)
+         # print(janus_stats)
          print_counts(sf_stats, ta_stats, gta_stats)
     elif args.sf_reports:
         sf_stats = get_stats(sf_bug_repo)
@@ -193,3 +196,7 @@ if __name__ == "__main__":
     elif args.gta_reports:
         gta_stats = get_stats(gta_bug_repo)
         print_html_ta(gta_stats)
+    elif args.janus_reports:
+        janus_stats = get_stats(janus_bug_repo)
+        print_html_ta(janus_stats) 
+
