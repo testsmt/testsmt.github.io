@@ -1,4 +1,4 @@
-privacy_key="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"
+privacy_key="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"
 ta_bug_repo="muchang/type_aware_bugs"
 sf_bug_repo="muchang/fusion_bugs"
 gta_bug_repo="wintered/typefuzz_bugs"

@@ -16,6 +16,18 @@ def has_labels(issue,labels):
         if not l in issue_labels: return False
     return True
 
+def get_stats_janus(repo_url):
+    repo = g.get_repo(repo_url)
+    issues = repo.get_issues(state='open')
+    z3, cvc4, z3_fixed, cvc4_fixed =[],[],[],[]
+    for i in issues:
+        if has_labels(i, "z3"): z3.append(i)
+        if has_labels(i, "cvc5"): cvc4.append(i)
+        if has_labels(i, ["z3","fixed"]): z3_fixed.append(i)
+        if has_labels(i, ["cvc5","fixed"]): cvc4_fixed.append(i)
+    res = [z3, cvc4, z3_fixed, cvc4_fixed]
+    return res
+
 def get_stats(repo_url):
     repo = g.get_repo(repo_url)
     issues = repo.get_issues(state='open')
@@ -59,23 +71,32 @@ def get_stats(repo_url):
 [Bugs in default mode (CVC4/5): XXXX (total) / XXXX(fixed)]
 [Soundness bugs (Z3): XXXX (total) / XXXX (fixed)]
 [Soundness bugs (CVC4/5): XXXX (total) / XXXX (fixed)]
+[Incompleteness bugs (Z3): XXXX (total) / XXXX (fixed)]
+[Incompleteness bugs (CVC4/5): XXXX (total) / XXXX (fixed)]
 """
-def print_counts(sf_stats,ta_stats, gta_stats):
-    summary_total, summary_fixed = len(sf_stats[0]) + len(sf_stats[1]) + len(ta_stats[0]) + len(ta_stats[1]) + len(gta_stats[0]) + len(gta_stats[1]), len(sf_stats[2]) + len(sf_stats[3]) + len(ta_stats[2]) + len(ta_stats[3]) + len(gta_stats[2]) + len(gta_stats[3])
-    z3_total, z3_fixed = len(sf_stats[0]) + len(ta_stats[0]) + len(gta_stats[0]), len(sf_stats[2]) + len(ta_stats[2]) + len(gta_stats[2])
-    cvc4_total, cvc4_fixed = len(sf_stats[1]) + len(ta_stats[1]) + len(gta_stats[1]), len(sf_stats[3]) + len(ta_stats[3])  + len(gta_stats[3])
-    z3_default, z3_fixed_default = len(sf_stats[4]) + len(ta_stats[4]) + len(gta_stats[4]), len(sf_stats[6]) + len(ta_stats[6]) +len(gta_stats[6])
-    cvc4_default, cvc4_fixed_default = len(sf_stats[5]) + len(ta_stats[5]) + len(gta_stats[5]), len(sf_stats[7]) + len(ta_stats[7])+ len(gta_stats[7])
+def print_counts(sf_stats,ta_stats, gta_stats, janus_stats):
+    # res = [z3, cvc4, z3_fixed, cvc4_fixed]
+    summary_total, summary_fixed = len(sf_stats[0]) + len(sf_stats[1]) + len(ta_stats[0]) + len(ta_stats[1]) + len(gta_stats[0]) + len(gta_stats[1]) + len(janus_stats[0]) + len(janus_stats[1]), len(sf_stats[2]) + len(sf_stats[3]) + len(ta_stats[2]) + len(ta_stats[3]) + len(gta_stats[2]) + len(gta_stats[3]) + len(janus_stats[0]) + len(janus_stats[1])
+    z3_total, z3_fixed = len(sf_stats[0]) + len(ta_stats[0]) + len(gta_stats[0]), len(sf_stats[2]) + len(ta_stats[2]) + len(gta_stats[2]) + len(janus_stats[2]) + len(janus_stats[3])
+    cvc4_total, cvc4_fixed = len(sf_stats[1]) + len(ta_stats[1]) + len(gta_stats[1]) + len(janus_stats[1]), len(sf_stats[3]) + len(ta_stats[3])  + len(gta_stats[3]) + len(janus_stats[3])
+    z3_default, z3_fixed_default = len(sf_stats[4]) + len(ta_stats[4]) + len(gta_stats[4]) + len(janus_stats[0]), len(sf_stats[6]) + len(ta_stats[6]) +len(gta_stats[6]) + len(janus_stats[2])
+    cvc4_default, cvc4_fixed_default = len(sf_stats[5]) + len(ta_stats[5]) + len(gta_stats[5]) + len(janus_stats[1]), len(sf_stats[7]) + len(ta_stats[7])+ len(gta_stats[7]) + len(janus_stats[3])
     z3_soundness, z3_fixed_soundness = len(sf_stats[8]) + len(ta_stats[8]) + len(gta_stats[8]),len(sf_stats[10]) + len(ta_stats[10]) + len(gta_stats[10])
     cvc4_soundness, cvc4_fixed_soundness = len(sf_stats[9]) + len(ta_stats[9]) + len(gta_stats[9]),len(sf_stats[11]) + len(ta_stats[11]) + len(gta_stats[11])
+    z3_incompleteness, z3_fixed_incompleteness = len(janus_stats[0]), len(janus_stats[2])
+    cvc4_incompleteness, cvc4_fixed_incompleteness = len(janus_stats[1]), len(janus_stats[3])
+
 
     print("<p>[Summary: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(summary_total, summary_fixed))
     print("<p>[Z3 bugs: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_total, z3_fixed))
-    print("[CVC4 bugs: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_total, cvc4_fixed))
+    print("[CVC4/5 bugs: <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_total, cvc4_fixed))
     print("<p>[Bugs in default mode (Z3): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_default, z3_fixed_default))
     print("[Bugs in default mode (CVC4/5): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_default, cvc4_fixed_default))
     print("<p>[Soundness bugs (Z3): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_soundness, z3_fixed_soundness))
     print("[Soundness bugs (CVC4/5): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_soundness, cvc4_fixed_soundness))
+    print("<p>[Incompleteness bugs (Z3): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(z3_incompleteness, z3_fixed_incompleteness))
+    print("[Incompleteness bugs (CVC4/5): <b>{0}</b> (total) / <b>{1}</b> (fixed)]<br>".format(cvc4_incompleteness, cvc4_fixed_incompleteness))
+
 
 def extract_url(issue):
     body = issue.body
@@ -90,11 +111,21 @@ def extract_url(issue):
 
 def get_status(issue):
     if has_labels(issue,"Reported"): return "Reported"
+    if has_labels(issue,"reported"): return "Reported"
+
     if has_labels(issue,"Confirmed"): return "Confirmed"
+    if has_labels(issue,"confirmed"): return "Confirmed"
+
     if has_labels(issue,"Fixed"): return "Fixed"
+    if has_labels(issue,"fixed"): return "Fixed"
+
     if has_labels(issue,"Duplicate"): return "Dup"
+    if has_labels(issue,"duplicate"): return "Dup"
+
     if has_labels(issue,"Won't fix") or has_labels(issue,"no-repro"): return "Won't fix"
-    print(issue.labels, issue.html_url,flush=True)
+    if has_labels(issue,"won't fix") or has_labels(issue,"no-repro"): return "Won't fix"
+    if has_labels(issue,"rejected") or has_labels(issue,"no-repro"): return "Won't fix"
+
     assert(False)
 
 
@@ -170,6 +201,23 @@ def print_html_ta(ta_stats):
         url, status = extract_url(i),get_status(i)
         print("<a href=\"{0}\">{0}</a> {1} <br />".format(url,status))
 
+def print_html_janus(res):
+    z3, cvc4 = res[0], res[1] 
+    z3_fixed, cvc4_fixed = res[2], res[3]
+    print("<h2>Incompleteness bug findings with Weakening & Strengthening </h2>")
+    for i in z3:
+        # if has_labels(i,["Soundness"]):continue
+        url, status = extract_url(i),get_status(i)
+        print("<a href=\"{0}\">{0}</a> {1} <br />".format(url,status))
+
+    for i in cvc4:
+        # if has_labels(i,["Soundness"]):continue
+        url, status = extract_url(i),get_status(i)
+        print("<a href=\"{0}\">{0}</a> {1} <br />".format(url,status))   
+
+
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--summary', action='store_true')
@@ -184,9 +232,8 @@ if __name__ == "__main__":
          ta_stats = get_stats(ta_bug_repo)
          sf_stats = get_stats(sf_bug_repo)
          gta_stats = get_stats(gta_bug_repo)
-         janus_stats = get_stats(janus_bug_repo)
-         # print(janus_stats)
-         print_counts(sf_stats, ta_stats, gta_stats)
+         janus_stats = get_stats_janus(janus_bug_repo)
+         print_counts(sf_stats, ta_stats, gta_stats, janus_stats)
     elif args.sf_reports:
         sf_stats = get_stats(sf_bug_repo)
         print_html_sf(sf_stats)
@@ -197,6 +244,5 @@ if __name__ == "__main__":
         gta_stats = get_stats(gta_bug_repo)
         print_html_ta(gta_stats)
     elif args.janus_reports:
-        janus_stats = get_stats(janus_bug_repo)
-        print_html_ta(janus_stats) 
-
+        janus_stats = get_stats_janus(janus_bug_repo)
+        print_html_janus(janus_stats)

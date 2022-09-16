@@ -41,7 +41,7 @@ generating diverse type-correct formulas.
 
 YinYang and OpFuzz, the realizations of semantic fusion and type-aware
 operator mutation, have demonstrated their remarkable effectiveness by
-having already <b>found 1,000+ bugs in Z3 and CVC4</b>, the two
+having already <b>found 1,500+ bugs in Z3 and CVC4/5</b>, the two
 state-of-the-art SMT solvers.
 
 <p>
@@ -50,19 +50,20 @@ We have maintained our continuous, extensive effort in stress-testing
 Z3 and CVC4 to benefit the SMT solver developer, user, and research
 communities:
 
-
-<p>
-[Summary: <b>1,560</b> (total) / <b>1,061</b> (fixed)]<br><br>
-[Z3 bugs: <b>1,147</b> (total) / <b>779</b> (fixed)]<br>
-[CVC4 bugs: <b>413</b> (total) / <b>282</b> (fixed)]<br><br>
-[Bugs in default mode (Z3): <b>680</b> (total) / <b>479</b> (fixed)]<br>
-[Bugs in default mode (CVC4): <b>204</b> (total) / <b>147</b> (fixed)]<br><br>
-[Soundness bugs (Z3): <b>375</b> (total) / <b>228</b> (fixed)]<br>
-[Soundness bugs (CVC4): <b>71</b> (total) / <b>60</b> (fixed)]<br>
+<p>[Summary: <b>1,677</b> (total) / <b>1,244</b> (fixed)]<br>
+<p>[Z3 bugs: <b>1,199</b> (total) / <b>889</b> (fixed)]<br>
+[CVC4/5 bugs: <b>465</b> (total) / <b>354</b> (fixed)]<br>
+<p>[Bugs in default mode (Z3): <b>709</b> (total) / <b>532</b> (fixed)]<br>
+[Bugs in default mode (CVC4/5): <b>243</b> (total) / <b>182</b> (fixed)]<br>
+<p>[Soundness bugs (Z3): <b>386</b> (total) / <b>256</b> (fixed)]<br>
+[Soundness bugs (CVC4/5): <b>77</b> (total) / <b>68</b> (fixed)]<br>
+<p>[Incompleteness bugs (Z3): <b>13</b> (total) / <b>8</b> (fixed)]<br>
+[Incompleteness bugs (CVC4/5): <b>18</b> (total) / <b>11</b> (fixed)]<br>
 </p>
 Semantic Fusion (<a href="yinyang_bugs.html">report links</a>) <br>
 Type-aware Operator Mutation (<a href="opfuzz_bugs.html">report links</a>) <br>
-Generative Type-aware Mutation (<a href="typefuzz_bugs.html">report links</a>)
+Generative Type-aware Mutation (<a href="typefuzz_bugs.html">report links</a>) <br> 
+Weakening and Strengthening (<a href="janus.html">report links</a>)
 </p>
 
 <p><img class="" src="./img/tool_logo.png" alt="" width="25pt" style="margin-bottom:-8px; margin-right:5px"/> <b>yinyang Tool</b>: <a href="https://github.com/testsmt/yinyang">https://github.com/testsmt/yinyang</a></p>
@@ -77,6 +78,8 @@ bugs in Z3 and CVC4.
 <a href="https://wintered.github.io/">Dominik Winterer</a> <br>
 <a href="http://chengyuzhang.com">Chengyu Zhang</a> <br>
 <a href="https://www.linkedin.com/in/jiwon-park-473998170/?originalSubdomain=fr">Jiwon Park</a> <br>
+<a href="https://maurobringolf.ch/">Mauro Bringolf</a> <br>
+
 
 
 
@@ -113,7 +116,14 @@ In <a href="https://2021.splashcon.org/track/splash-2021-oopsla"><I>Proceedings 
  Both authors contributed equally to this work.
 </div>
 <br> 
+<br> 
 
+[4] <a href="https://testsmt.github.io/papers/bringolf-winterer-su-ase22.pdf"><B>Finding and Understanding Incompleteness Bugs in SMT Solvers.</B></a> <br>
+<!--[<a href="https://testsmt.github.io/slides/oopsla21-generative-type-aware-mutation.pdf">slides</a> | -->
+  <!--<a href="https://www.youtube.com/watch?v=Jxc4N4mrm8o&t=2s&ab_channel=ACMSIGPLAN">talk video</a>] <br>-->
+Mauro Bringolf, Dominik Winterer and Zhendong Su</br>
+In <a href="https://conf.researchr.org/home/ase-2022"><I>Proceedings of ASE 2022</I></a>, October 2022 </br>
+<br> 
 
 
 <h3>Acknowledgments</h3>
