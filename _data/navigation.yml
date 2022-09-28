@@ -1,0 +1,11 @@
+homenav:
+  - title: "Introduction"
+    url: /#introduction
+  - title: "Results"
+    url: /#results
+  - title: "Tools & Publications"
+    url: /#publications
+  - title: "Contributors"
+    url: /#contributors
+  - title: "Acknowledgments"
+    url: /#acknowledgments
