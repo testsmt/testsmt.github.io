@@ -8,6 +8,8 @@ plugins:
   - jekyll-include-cache # required by the minimal-mistakes theme
 
 title: Project Yin-Yang for SMT Solver Testing # Can we find a better name?
+url: "testsmt.github.io"
+
 
 # Make stuff in _conferences accessible from /
 collections:
@@ -24,6 +26,7 @@ defaults:
       classes: "wide"
 
 logo: "./img/tool_logo.png"
+teaser:  "./img/tool_logo.png"
 
 
 twitter:
@@ -43,3 +46,10 @@ footer:
 
 sidebar:
   nav: "docs"
+
+locale                   : "en-US"
+title                    : "Project Yin-Yang for SMT Solver Testing"
+title_separator          : "-"
+subtitle                 : # site tagline that appears below site title in masthead
+description              : "Satisfiability Modulo Theory (SMT) solvers are foundational tools for many subareas of computer science, including formal verification, programming languages, and software engineering. Their reliability and robustness are crucial, especially for the safety-critical domains. However, effectively validating SMT solvers has been a longstanding challenge. The goal of Project Yin-Yang is to develop novel, effective, practical methods and techniques to help make SMT solvers more reliable, powerful, and usable. Our tools have demonstrated their remarkable effectiveness by having already found 1,500+ bugs in Z3 and CVC4/5, the two state-of-the-art SMT solvers."
+

@@ -8,11 +8,12 @@ sidebar:
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
   <title>Project Yin-Yang</title>
 </head>
 
 
-<body>
+<body onload="load()">
 <!-- <link type="text/css" rel="stylesheet" href="style.css"> -->
 
 <!-- <font face="ariel,helvetica"> -->
@@ -34,7 +35,7 @@ longstanding challenge.  The goal of Project Yin-Yang is to develop
 novel, effective, practical methods and techniques to help make SMT
 solvers more reliable, powerful, and usable.
 
-To this end, we have introduced two novel, highly effective techniques
+<!-- To this end, we have introduced two novel, highly effective techniques
 for stress-testing SMT solvers: <i>semantic fusion</i> [1]
 and <i>type-aware operator mutation</i> [2]. The key idea behind
 semantic fusion is to systematically combine two existing
@@ -42,11 +43,10 @@ equisatisfiable (i.e., both satisfiable or unsatisfiable) formulas
 into a new formula that, by construction, preserves
 satisfiability. Type-aware operator mutation is a simple, general,
 unusually effective approach for differentially testing SMT solvers by
-generating diverse type-correct formulas.
+generating diverse type-correct formulas. -->
 
-YinYang and OpFuzz, the realizations of semantic fusion and type-aware
-operator mutation, have demonstrated their remarkable effectiveness by
-having already <b>found 1,500+ bugs in Z3 and CVC4/5</b>, the two
+Our tools have demonstrated their remarkable effectiveness by
+having already found 1,500+ bugs in Z3 and CVC4/5, the two
 state-of-the-art SMT solvers.
 
 <br><br>
@@ -54,13 +54,12 @@ state-of-the-art SMT solvers.
 <center><h1 id="results">Results</h1></center>
 
 We have maintained our continuous, extensive effort in stress-testing
-Z3 and CVC4 to benefit the SMT solver developer, user, and research
+Z3 and CVC4/5 to benefit the SMT solver developer, user, and research
 communities:
-
 <br><br>
-
-<p>[Summary: <b>1,677</b> (total) / <b>1,244</b> (fixed)]<br>
-<p>[Z3 bugs: <b>1,199</b> (total) / <b>889</b> (fixed)]<br>
+<center><div style="font-size: 25px;"><b>Yin-Yang project has found <b><span id="totalnum">1677</span></b> (total) / <b><span id='fixednum'>1,244</span></b> (fixed) bugs.</b></div></center>
+<br>
+<p>[Z3 bugs: <b>1199</b> (total) / <b>889</b> (fixed)]<br>
 [CVC4/5 bugs: <b>465</b> (total) / <b>354</b> (fixed)]<br>
 <p>[Bugs in default mode (Z3): <b>709</b> (total) / <b>532</b> (fixed)]<br>
 [Bugs in default mode (CVC4/5): <b>243</b> (total) / <b>182</b> (fixed)]<br>
@@ -88,6 +87,8 @@ bugs in Z3 and CVC4.
 <div class="notice--primary">
 <img class="" src="/img/GitHub-Mark-64px.png" alt="" width="20pt"/> <b>yinyang</b>: <a href="https://github.com/testsmt/yinyang">https://github.com/testsmt/yinyang</a>
 </div>
+<div style="width: 60%; display: inline-block;">
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/JFu8cJYbxBI?start=5" title="17 June 1420   Validating SMT Solvers via Semantic Fusion" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 <h3>Publications</h3>
 
 <div class="notice--primary">
@@ -201,9 +202,52 @@ We are also grateful to Google for an <a href="https://opensource.googleblog.com
 
 <br><br><br><br>
 
-<tt>last modified: 2022.09.15</tt>
+<tt>last modified: 2022.09.29</tt>
+
+<script>
+  function animate(obj, initVal, lastVal, duration) {
+     let startTime = null;
+
+  //get the current timestamp and assign it to the currentTime variable
+  let currentTime = Date.now();
+
+  //pass the current timestamp to the step function
+  const step = (currentTime ) => {
+
+  //if the start time is null, assign the current time to startTime
+  if (!startTime) {
+     startTime = currentTime ;
+  }
+
+  //calculate the value to be used in calculating the number to be displayed
+  const progress = Math.min((currentTime - startTime)/ duration, 1);
+
+  //calculate what to be displayed using the value gotten above
+  obj.innerHTML = Math.floor(progress * (lastVal - initVal) + initVal);
+
+  //checking to make sure the counter does not exceed the last value (lastVal)
+  if (progress < 1) {
+     window.requestAnimationFrame(step);
+  } else {
+        window.cancelAnimationFrame(window.requestAnimationFrame(step));
+     }
+  };
+  //start animating
+     window.requestAnimationFrame(step);
+  }
+
+  let text1 = document.getElementById('totalnum');
+  let text2 = document.getElementById('fixednum');
+
+  const load = () => {
+     animate(text1, 0, 1667, 3000);
+     animate(text2, 0, 1244, 3000);
+  }
+</script>
 </body>
 </html>
+
+
 
 <!-- cannot change the footer template because it's computed only once for all pages -->
 <style>#footer {display: none} </style>
