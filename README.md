@@ -1,0 +1,1 @@
+To build the site locally, please install Ruby, Jekyll, and Bundler and run `bundle install` at the root of the repository to set up the environment. Then execute `bundle exec jekyll serve` to start a host server. 

@@ -2,16 +2,8 @@
 
 body {
 	text-align: justify;
-/* 	margin: 1%; */
 	background-color:#ffffff;
-	max-width: 48em;
 }
-
-#canvas {
-	width:600px;
-	margin:20px auto;
-}
-
 /*
 a:link { 
 	color: #000080;

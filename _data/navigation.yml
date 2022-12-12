@@ -1,0 +1,59 @@
+homenav:
+  - title: "Introduction"
+    url: /#introduction
+  - title: "Results"
+    url: /#results
+  - title: "Tools & Publications"
+    url: /#publications
+  - title: "Contributors"
+    url: /#contributors
+  - title: "Acknowledgments"
+    url: /#acknowledgments
+
+backnav:
+  - title: "Back"
+    url: /
+
+yinyangnav:
+  - title: "CVC4 bugs"
+    url: /yinyang_bugs.html#cvc4
+  - title: "Z3 bugs"
+    url: /yinyang_bugs.html#z3
+  - title: "Back"
+    url: /
+
+opfuzznav:
+  - title: "CVC4 bugs"
+    url: /opfuzz_bugs.html#cvc4
+    children:
+      - title: "&nbsp;&nbsp;&nbsp;&nbsp;Soundness Bugs"
+        url: /opfuzz_bugs.html#cvc4sound
+      - title: "&nbsp;&nbsp;&nbsp;&nbsp;Others"
+        url: /opfuzz_bugs.html#cvc4others
+  - title: "Z3 bugs"
+    url: /opfuzz_bugs.html#z3
+    children:
+      - title: "&nbsp;&nbsp;&nbsp;&nbsp;Soundness Bugs"
+        url: /opfuzz_bugs.html#z3sound
+      - title: "&nbsp;&nbsp;&nbsp;&nbsp;Others"
+        url: /opfuzz_bugs.html#z3others
+  - title: "Back"
+    url: /
+
+typefuzznav:
+- title: "CVC4 bugs"
+  url: /typefuzz_bugs.html#cvc4
+  children:
+      - title: "&nbsp;&nbsp;&nbsp;&nbsp;Soundness Bugs"
+        url: /typefuzz_bugs.html#cvc4sound
+      - title: "&nbsp;&nbsp;&nbsp;&nbsp;Others"
+        url: /typefuzz_bugs.html#cvc4others
+- title: "Z3 bugs"
+  url: /typefuzz_bugs.html#z3
+  children:
+      - title: "&nbsp;&nbsp;&nbsp;&nbsp;Soundness Bugs"
+        url: /typefuzz_bugs.html#z3sound
+      - title: "&nbsp;&nbsp;&nbsp;&nbsp;Others"
+        url: /typefuzz_bugs.html#z3others
+- title: "Back"
+  url: /

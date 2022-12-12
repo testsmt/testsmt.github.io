@@ -141,7 +141,7 @@ Print Semantic Fusion bug links
 def print_html_sf(sf_stats):
     z3,cvc4 = sf_stats[0], sf_stats[1]
     print("<h2>Bug findings with Semantic Fusion</h2>")
-    print("\n<h2>CVC4</h2>")
+    print("\n<h2 id='cvc4'>CVC4</h2>")
     for i in cvc4:
         url, status = extract_url(i),get_status(i)
         print("<a href=\"{0}\">{0}</a> {1} <br />".format(url,status))
@@ -168,8 +168,8 @@ def print_html_ta(ta_stats):
     z3_refutation, z3_solution = ta_stats[12], ta_stats[13]
     cvc4_refutation, cvc4_solution = ta_stats[14], ta_stats[15]
     print("<h2>Bug findings with Type-aware mutation</h2>")
-    print("<h2>========= CVC4 =========</h2>")
-    print("<h2>Soundness Bugs</h2>")
+    print("<h2 id='cvc4'>========= CVC4 =========</h2>")
+    print("<h2 id='cvc4sound'>Soundness Bugs</h2>")
     print("<h4>Refutation Soundness</h4>")
     for i in cvc4_refutation:
         url, status = extract_url(i),get_status(i)
@@ -178,15 +178,15 @@ def print_html_ta(ta_stats):
     for i in cvc4_solution:
         url, status = extract_url(i),get_status(i)
         print("<a href=\"{0}\">{0}</a> {1} <br />".format(url,status))
-    print("<h2>Others</h2>")
+    print("<h2 id='cvc4others'>Others</h2>")
     for i in cvc4:
         if has_labels(i,["Soundness"]):continue
         url, status = extract_url(i),get_status(i)
         print("<a href=\"{0}\">{0}</a> {1} <br />".format(url,status))
 
     print()
-    print("<h2>========= Z3 =========</h2>")
-    print("<h2>Soundness Bugs</h2>")
+    print("<h2 id='z3'>========= Z3 =========</h2>")
+    print("<h2 id='z3sound'>Soundness Bugs</h2>")
     print("<h4>Refutation Soundness</h4>")
     for i in z3_refutation:
         url, status = extract_url(i),get_status(i)
@@ -195,7 +195,7 @@ def print_html_ta(ta_stats):
     for i in z3_solution:
         url, status = extract_url(i),get_status(i)
         print("<a href=\"{0}\">{0}</a> {1} <br />".format(url,status))
-    print("<h2>Others</h2>")
+    print("<h2 id='z3others'>Others</h2>")
     for i in z3:
         if has_labels(i,["Soundness"]):continue
         url, status = extract_url(i),get_status(i)
